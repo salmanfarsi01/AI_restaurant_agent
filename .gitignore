@@ -1,0 +1,110 @@
+# =====================
+# Python
+# =====================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.so
+.Python
+
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+
+*.egg-info/
+.installed.cfg
+*.egg
+
+
+# =====================
+# Virtual Environment
+# =====================
+
+venv/
+env/
+.venv/
+
+
+# =====================
+# Environment Variables
+# =====================
+
+.env
+.env.*
+!.env.example
+
+
+# =====================
+# Jupyter
+# =====================
+
+.ipynb_checkpoints/
+
+
+# =====================
+# IDE
+# =====================
+
+.vscode/
+.idea/
+
+
+# =====================
+# Logs
+# =====================
+
+*.log
+logs/
+
+
+# =====================
+# HuggingFace Models
+# =====================
+
+.cache/
+.cache/huggingface/
+huggingface_cache/
+models/
+
+# Transformers cache
+*.bin
+*.safetensors
+
+
+# =====================
+# Qdrant
+# =====================
+
+qdrant_storage/
+storage/
+
+
+# =====================
+# Data
+# =====================
+
+data/raw/*.csv
+data/processed/
+
+# keep sample data
+!data/raw/*sample*.csv
+
+
+# =====================
+# Docker
+# =====================
+
+docker-compose.override.yml
+
+
+# =====================
+# OS
+# =====================
+
+.DS_Store
+Thumbs.db
