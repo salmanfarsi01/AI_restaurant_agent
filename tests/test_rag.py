@@ -1,5 +1,17 @@
+from app.config import MODEL_REGISTRY
 from app.rag.loader import load_all_documents, load_menu_csv_documents, MENU_CSV_SAMPLE_PATH
 from app.rag.splitter import split_documents
+
+
+def test_model_registry_has_supported_local_models():
+    assert set(MODEL_REGISTRY) == {
+        "qwen2.5-0.5b",
+        "qwen2.5-1.5b",
+        "llama3.2-3b",
+        "phi3.5-mini",
+    }
+    for config in MODEL_REGISTRY.values():
+        assert {"repo_id", "filename", "label"}.issubset(config)
 
 
 def test_load_menu_csv_dedupes_change_log():

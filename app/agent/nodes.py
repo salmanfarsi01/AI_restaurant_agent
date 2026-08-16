@@ -61,10 +61,29 @@ def handle_order(state: AgentState) -> dict:
     llm = get_llm(temperature=0.0)
     prompt = prompts.ORDER_EXTRACTION_PROMPT.format(context=menu_context, message=state["user_message"])
     raw = llm.invoke([HumanMessage(content=prompt)]).content.strip()
-
     cart = list(state.get("cart", []))
+
+    # Robust JSON parsing: try direct load, then try extracting the first {...} object
+    parsed = None
     try:
         parsed = json.loads(raw)
+    except json.JSONDecodeError:
+        s = raw.strip()
+        start = s.find("{")
+        end = s.rfind("}")
+        if start != -1 and end != -1 and end > start:
+            try:
+                parsed = json.loads(s[start : end + 1])
+            except Exception as e2:
+                log.warning("Could not parse extracted JSON from LLM output: %r (%s)", raw, e2)
+        else:
+            log.warning("LLM returned non-JSON output for order extraction: %r", raw)
+
+    if not isinstance(parsed, dict):
+        # default safe action when parsing fails or output is invalid
+        parsed = {"action": "none", "item_name": "", "quantity": 0}
+
+    try:
         action = parsed.get("action", "none")
         name = parsed.get("item_name", "")
         qty = int(parsed.get("quantity", 1) or 1)
@@ -81,8 +100,8 @@ def handle_order(state: AgentState) -> dict:
             cart = [c for c in cart if name.lower() not in c["name"].lower()]
         elif action == "clear":
             cart = []
-    except (json.JSONDecodeError, ValueError) as e:
-        log.warning(f"Could not parse order extraction JSON: {raw!r} ({e})")
+    except ValueError as e:
+        log.warning(f"Error processing parsed order JSON: {parsed!r} ({e})")
 
     return {"cart": cart, "retrieved_context": menu_context}
 

@@ -1,16 +1,44 @@
 """
-Centralized app configuration, loaded from .env
+Centralized app configuration, loaded from .env.
+
+This project is being simplified for an agile local-only RAG flow first:
+- use the existing Qdrant index on disk
+- select one of the four local model presets below
+- validate retrieval locally before adding agent / Telegram / evaluation layers
 """
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+MODEL_REGISTRY = {
+    "qwen2.5-0.5b": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+        "filename": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+        "label": "Qwen2.5 0.5B",
+    },
+    "qwen2.5-1.5b": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+        "filename": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+        "label": "Qwen2.5 1.5B",
+    },
+    "llama3.2-3b": {
+        "repo_id": "bartowski/Llama-3.2-3B-Instruct-GGUF",
+        "filename": "Llama-3.2-3B-Instruct-Q4_K_M.gguf",
+        "label": "Llama 3.2 3B",
+    },
+    "phi3.5-mini": {
+        "repo_id": "bartowski/Phi-3.5-mini-instruct-GGUF",
+        "filename": "Phi-3.5-mini-instruct-Q4_K_M.gguf",
+        "label": "Phi-3.5 Mini",
+    },
+}
 
 
 class Settings(BaseSettings):
     # Telegram
     telegram_bot_token: str = ""
 
-    # LLM backend: "ollama" (talk to `ollama serve`) or "huggingface" (load
-    # a transformers checkpoint directly into memory on this machine)
-    llm_backend: str = "ollama"
+    # Local-first model selection: keep simple until agent + Telegram are added.
+    llm_backend: str = "huggingface"
+    selected_model: str = "qwen2.5-1.5b"
 
     # Ollama
     ollama_base_url: str = "http://localhost:11434"
@@ -23,9 +51,9 @@ class Settings(BaseSettings):
     embedding_model: str = "intfloat/multilingual-e5-large"
 
     # Vector DB (Qdrant)
-    qdrant_url: str = "http://localhost:6333"   # set to "" to use embedded/on-disk mode instead
+    qdrant_url: str = ""  # keep empty to use the local on-disk index already created
     qdrant_api_key: str = ""
-    qdrant_path: str = "./data/processed/qdrant_db"  # used only when qdrant_url == ""
+    qdrant_path: str = "./data/processed/qdrant_storage"  # existing local index directory
     qdrant_collection: str = "restaurant_kb"
 
     # App DB
@@ -35,6 +63,10 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+
+    def get_selected_model_config(self, model_name: str | None = None) -> dict:
+        key = model_name or self.selected_model
+        return MODEL_REGISTRY.get(key, MODEL_REGISTRY["qwen2.5-1.5b"])
 
 
 settings = Settings()
