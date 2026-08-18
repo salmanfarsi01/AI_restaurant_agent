@@ -1,0 +1,5 @@
+model_name,ollama_model,accuracy,avg_latency_seconds,total_queries
+Qwen2.5 0.5B,qwen2.5:0.5b,0.2,7.15,5
+Qwen2.5 1.5B,qwen2.5:1.5b,0.2,3.2391999999999994,5
+Qwen3 0.6B,qwen3:0.6b,0.2,3.2952,5
+Qwen3 1.7B,qwen3:1.7b,0.2,4.0998,5

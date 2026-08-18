@@ -1,0 +1,30 @@
+model_key,model_name,ollama_model,lang,query,response,latency_seconds,keyword_hit
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the price of Kacchi Biryani?,"The order has been placed, but the customer has not yet confirmed it. You should ask the customer to confirm the order details and payment information.",19.744,0
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Do you have any vegetarian dishes?,"Yes, the current cart is empty. Please proceed with the checkout process.",3.657,0
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is your cancellation policy?,"Cancellation is free of charge within 5 minutes of placing the order. After that, a 20% cancellation fee applies.",3.102,1
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the minimum order value?,"The order has been placed successfully, but the customer needs to confirm the details. Please provide the customer with the order details and ask them to confirm the information.",4.036,0
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,I want to order 2 chicken tehari,"I'm sorry, but I'm Qwen, not a customer service representative. I don't have the capability to update customer information or confirm updates to customers. If you have any questions or need assistance with something else, feel free to ask!",5.211,0
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,What is the price of Kacchi Biryani?,The order has been placed successfully. The total amount for the order is 0. The customer has not yet confirmed the order.,3.074,0
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,Do you have any vegetarian dishes?,"Yes, the current cart is empty.",3.304,0
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,What is your cancellation policy?,"Cancellation is free of charge within 5 minutes of placing the order. After that, a 20% cancellation fee applies.",2.526,1
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,What is the minimum order value?,"The order has been placed successfully. The customer has confirmed the order by clicking the ""Add to Cart"" button and selecting the desired items. The total price for the order is 0.",3.792,0
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,I want to order 2 chicken tehari,"Yes, I can confirm the update to the customer. Please provide me with the details so I can update the cart accordingly.",3.5,0
+qwen3-0.6b,Qwen3 0.6B,qwen3:0.6b,en,What is the price of Kacchi Biryani?,"The order has been placed successfully, and the customer has confirmed the order.",3.054,0
+qwen3-0.6b,Qwen3 0.6B,qwen3:0.6b,en,Do you have any vegetarian dishes?,"Yes, I have updated the customer's cart.",2.897,0
+qwen3-0.6b,Qwen3 0.6B,qwen3:0.6b,en,What is your cancellation policy?,"Your cancellation policy is as follows:
+
+- Orders can be cancelled free of charge within 5 minutes of placing the order.
+- After 5 minutes, a 20% cancellation fee applies.
+- Refunds for incorrect or missing items are processed within 3-5 business days to the original payment method.",3.139,1
+qwen3-0.6b,Qwen3 0.6B,qwen3:0.6b,en,What is the minimum order value?,"The order has been placed, but the customer has not yet confirmed it. The order has been placed, but the customer has not yet confirmed it.",3.687,0
+qwen3-0.6b,Qwen3 0.6B,qwen3:0.6b,en,I want to order 2 chicken tehari,"I'm sorry, but I need to know which customer you are referring to in order to update their cart. Could you please provide me with their name or the order number?",3.699,0
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,What is the price of Kacchi Biryani?,The order for confirmation has been received. The customer has not yet confirmed the order.,3.0,0
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,Do you have any vegetarian dishes?,"Yes, I will update the customer's current cart. Please provide the details of the items you wish to add to the cart.",3.305,0
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,What is your cancellation policy?,"1. Order Confirmation: An order is confirmed only after the customer verbally or textually confirms the final cart summary.
+2. Cancellation: Orders can be cancelled free of charge within 5 minutes of placing the order. After that, a 20% cancellation fee applies.
+3. Refunds: Refunds for incorrect or missing items are processed within 3-5 business days to the original payment method.
+4. Spice Level: Customers may request mild, medium, or hot spice levels for applicable dishes at no extra charge.
+5. Allergies: Please inform us of any food allergies before ordering; we cannot guarantee a completely allergen-free kitchen.
+6. Delivery Delays: In case of delays beyond 90 minutes, customers are entitled to a 10% discount on that order.",5.774,1
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,What is the minimum order value?,The order has been placed successfully. The customer has confirmed the order.,5.191,0
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,I want to order 2 chicken tehari,"Yes, I can confirm that you have 2 Chicken Tenders 12ct in your cart.",3.229,0
