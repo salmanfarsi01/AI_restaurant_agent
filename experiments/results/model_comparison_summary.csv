@@ -1,5 +1,5 @@
-model_name,ollama_model,accuracy,avg_latency_seconds,total_queries
-Qwen2.5 0.5B,qwen2.5:0.5b,0.2,7.15,5
-Qwen2.5 1.5B,qwen2.5:1.5b,0.2,3.2391999999999994,5
-Qwen3 0.6B,qwen3:0.6b,0.2,3.2952,5
-Qwen3 1.7B,qwen3:1.7b,0.2,4.0998,5
+model_name,ollama_model,correct_answers,total_questions,accuracy_pct,factual_correctness_pct,hallucination_rate_pct,avg_latency_seconds
+Qwen2.5 1.5B,qwen2.5:1.5b,1,5,20.0,20.0,80.0,3.2814
+Qwen3 0.6B,qwen3:0.6b,1,5,20.0,20.0,80.0,3.3212
+Qwen3 1.7B,qwen3:1.7b,1,5,20.0,20.0,80.0,3.8252
+Qwen2.5 0.5B,qwen2.5:0.5b,1,5,20.0,20.0,80.0,9.675600000000001

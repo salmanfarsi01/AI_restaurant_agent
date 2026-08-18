@@ -1,0 +1,13 @@
+model_key,model_name,ollama_model,lang,query,response,latency_seconds,keyword_hit
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,What is the price of Kacchi Biryani?,"This order has been placed, but it is not yet confirmed. The customer should confirm their order details with the seller before proceeding.",3.104,0
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,Do you have any vegetarian dishes?,"I'm sorry, but I'm Qwen, not a customer. I don't have the ability to update customer information. If you have any questions or need assistance, feel free to ask.",3.725,0
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,What is your cancellation policy?,"The cancellation policy for Dhaka Spice House orders is as follows:
+
+- Orders can be cancelled free of charge within 5 minutes of placing the order.
+- After 5 minutes, a 20% cancellation fee applies.
+- Refunds for incorrect or missing items are processed within 3-5 business days to the original payment method.",3.388,1
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,What is the minimum order value?,"The order for confirmation and customer confirmation is as follows:
+
+1. The customer has placed an order.
+2. The total amount for the order is 0.",3.592,0
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,I want to order 2 chicken tehari,"Yes, I can confirm the update to the customer. Please provide the customer's name and the details of the update.",3.635,0

@@ -1,0 +1,6 @@
+model_key,model_name,ollama_model,lang,query,response,latency_seconds,keyword_hit
+qwen3-0.6b,Qwen3 0.6B,qwen3:0.6b,en,What is the price of Kacchi Biryani?,"The order has been placed, but the customer has not yet confirmed the purchase. You should ask the customer to confirm the order by providing them with the order number or by contacting the customer service representative.",3.364,0
+qwen3-0.6b,Qwen3 0.6B,qwen3:0.6b,en,Do you have any vegetarian dishes?,"Yes, I have updated the current cart to an empty cart.",2.822,0
+qwen3-0.6b,Qwen3 0.6B,qwen3:0.6b,en,What is your cancellation policy?,"Cancellation is free of charge within 5 minutes of placing the order. After that, a 20% cancellation fee applies.",2.161,1
+qwen3-0.6b,Qwen3 0.6B,qwen3:0.6b,en,What is the minimum order value?,"This order is for a customer to place an order. The customer has not yet placed an order, so the order should be confirmed and the customer should be asked to confirm their order.",3.535,0
+qwen3-0.6b,Qwen3 0.6B,qwen3:0.6b,en,I want to order 2 chicken tehari,"Yes, I can confirm that you have 2 Chicken Tenders 12ct in your current cart.",3.124,0

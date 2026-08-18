@@ -1,0 +1,6 @@
+model_key,model_name,ollama_model,lang,query,response,latency_seconds,keyword_hit
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,What is the price of Kacchi Biryani?,"The order has been placed, but the customer has not yet confirmed it. They should proceed to the checkout process to complete the transaction.",3.203,0
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,Do you have any vegetarian dishes?,"Yes, I have updated the cart to ""empty cart"". Is there anything else I can assist you with?",3.031,0
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,What is your cancellation policy?,"Cancellation is free of charge within 5 minutes of placing the order. After that, a 20% cancellation fee applies.",2.223,1
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,What is the minimum order value?,The order has been placed successfully. The customer has confirmed their purchase.,3.147,0
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,I want to order 2 chicken tehari,"Yes, I can confirm this update to the customer. I'm Qwen, an AI created by Alibaba Cloud.",3.274,0

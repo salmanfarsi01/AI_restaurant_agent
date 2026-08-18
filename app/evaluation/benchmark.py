@@ -1,4 +1,15 @@
-"""Benchmark harness for local Ollama model comparison and seaborn charts."""
+"""Benchmark harness for local Ollama model comparison and seaborn charts.
+
+This is a practical, project-level evaluation suite for the current local RAG bot.
+It reports:
+- accuracy %: answer contains the expected fact(s)
+- latency: end-to-end response time
+- factual correctness: percentage of answers grounded in the expected facts
+- hallucination rate: percentage of answers that do not match the expected facts
+
+This is intentionally a lightweight benchmark for local model comparison, not a
+full-blown RAGAS or human-judged evaluation suite.
+"""
 from __future__ import annotations
 
 import argparse
@@ -56,7 +67,13 @@ def evaluate_model(model_key_or_name: str, queries=None) -> pd.DataFrame:
 
             result, elapsed = time_call(_invoke)
             response = result.get("response", "")
-            hit = keyword_match(response, case["expected_contains"])
+            expected = case["expected_contains"]
+            hit = keyword_match(response, expected)
+
+            # Factual correctness is treated as grounded faithfulness to the
+            # expected fact(s) for the current benchmark dataset.
+            factual_correct = 1 if hit else 0
+            hallucination = 0 if hit else 1
 
             rows.append({
                 "model_key": model_key_or_name,
@@ -67,6 +84,9 @@ def evaluate_model(model_key_or_name: str, queries=None) -> pd.DataFrame:
                 "response": response,
                 "latency_seconds": round(elapsed, 3),
                 "keyword_hit": int(hit),
+                "factual_correctness": factual_correct,
+                "hallucination": hallucination,
+                "expected_contains": "; ".join(expected),
             })
             print(f"[{model_display}] {i + 1}/{len(queries)} | hit={hit} | {elapsed:.2f}s | {case['query']}")
 
@@ -84,13 +104,13 @@ def plot_model_comparison(summary_df: pd.DataFrame, out_dir: Path) -> None:
     sns.set_theme(style="whitegrid")
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-    sns.barplot(data=summary_df, x="model_name", y="accuracy", palette="viridis", ax=axes[0])
-    axes[0].set_title("Accuracy by model")
+    sns.barplot(data=summary_df, x="model_name", y="accuracy_pct", hue="model_name", dodge=False, palette="viridis", legend=False, ax=axes[0])
+    axes[0].set_title("Accuracy by model (%)")
     axes[0].set_xlabel("Model")
-    axes[0].set_ylabel("Accuracy")
+    axes[0].set_ylabel("Accuracy (%)")
     axes[0].tick_params(axis="x", rotation=20)
 
-    sns.barplot(data=summary_df, x="model_name", y="avg_latency_seconds", palette="magma", ax=axes[1])
+    sns.barplot(data=summary_df, x="model_name", y="avg_latency_seconds", hue="model_name", dodge=False, palette="magma", legend=False, ax=axes[1])
     axes[1].set_title("Average latency by model")
     axes[1].set_xlabel("Model")
     axes[1].set_ylabel("Seconds")
@@ -114,12 +134,21 @@ def run_benchmark(model_keys: list[str] | None = None) -> pd.DataFrame:
         df = evaluate_model(key)
         all_rows.append(df)
 
+        correct_count = int(df["keyword_hit"].sum())
+        total_queries = int(len(df))
+        accuracy_pct = (correct_count / total_queries * 100.0) if total_queries else 0.0
+        factual_correctness_pct = (df["factual_correctness"].mean() * 100.0) if total_queries else 0.0
+        hallucination_rate_pct = (df["hallucination"].mean() * 100.0) if total_queries else 0.0
+
         summary = {
             "model_name": df["model_name"].iloc[0],
             "ollama_model": df["ollama_model"].iloc[0],
-            "accuracy": float(df["keyword_hit"].mean()),
+            "correct_answers": correct_count,
+            "total_questions": total_queries,
+            "accuracy_pct": accuracy_pct,
+            "factual_correctness_pct": factual_correctness_pct,
+            "hallucination_rate_pct": hallucination_rate_pct,
             "avg_latency_seconds": float(df["latency_seconds"].mean()),
-            "total_queries": int(len(df)),
         }
         summary_rows.append(summary)
 
@@ -127,21 +156,34 @@ def run_benchmark(model_keys: list[str] | None = None) -> pd.DataFrame:
         csv_path = RESULTS_DIR / f"benchmark_{key}_{timestamp}.csv"
         save_model_csv(df, csv_path)
         print(f"\nSaved per-model CSV to {csv_path}")
-        print(f"Accuracy: {summary['accuracy']:.1%} | Avg latency: {summary['avg_latency_seconds']:.2f}s")
+        print(
+            f"Accuracy: {accuracy_pct:.2f}% ({correct_count}/{total_queries}) | "
+            f"Factual correctness: {factual_correctness_pct:.2f}% | "
+            f"Hallucination rate: {hallucination_rate_pct:.2f}% | "
+            f"Avg latency: {summary['avg_latency_seconds']:.2f}s"
+        )
 
     combined_df = pd.concat(all_rows, ignore_index=True)
     combined_csv = RESULTS_DIR / "model_comparison_all_runs.csv"
     save_model_csv(combined_df, combined_csv)
 
     summary_df = pd.DataFrame(summary_rows)
-    summary_df["accuracy"] = summary_df["accuracy"].astype(float)
+    summary_df = summary_df.sort_values(["accuracy_pct", "avg_latency_seconds"], ascending=[False, True]).reset_index(drop=True)
+    summary_df["accuracy_pct"] = summary_df["accuracy_pct"].astype(float)
+    summary_df["factual_correctness_pct"] = summary_df["factual_correctness_pct"].astype(float)
+    summary_df["hallucination_rate_pct"] = summary_df["hallucination_rate_pct"].astype(float)
     summary_df["avg_latency_seconds"] = summary_df["avg_latency_seconds"].astype(float)
+
     summary_csv = RESULTS_DIR / "model_comparison_summary.csv"
     summary_df.to_csv(summary_csv, index=False)
+
+    table_csv = RESULTS_DIR / "comparison_table.csv"
+    summary_df.to_csv(table_csv, index=False)
 
     plot_model_comparison(summary_df, RESULTS_DIR)
     print(f"Saved combined results to {combined_csv}")
     print(f"Saved summary to {summary_csv}")
+    print(f"Saved cleaner comparison table to {table_csv}")
     print(f"Saved graph to {RESULTS_DIR / 'model_performance_comparison.png'}")
 
     return summary_df

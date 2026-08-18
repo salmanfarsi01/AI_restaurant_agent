@@ -1,0 +1,183 @@
+model_key,model_name,ollama_model,lang,query,response,latency_seconds,keyword_hit,factual_correctness,hallucination,expected_contains
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the price of 1% Low Fat Milk (110 Cals)?,"This order has been placed, but the customer has not yet confirmed it. To ensure the order is processed correctly, we recommend the customer to confirm the order by clicking the ""Confirm"" button or by contacting the customer service team.",25.346,0,0,1,$2.19; $2.29; 2.19; 2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,How much is the 10-Piece Boneless Wing Meal at American Deli?,The order is confirmed. The customer has ordered 10-piece boneless wing meal for a total price of 14.19.,6.064,1,1,0,$13.99; $14.19; 13.99; 14.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has a sandwich called 1% Low Fat Milk (110 Cals)?,"The order has been placed, but the customer has not yet confirmed it. Please ask the customer to confirm the order details and proceed with the payment process.",5.457,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What category is the 10-Piece Boneless Wing Meal in?,"The order has been placed, but the customer has not yet confirmed the purchase. To ensure the transaction is completed, please provide the customer with the necessary information and instructions to complete the purchase.",4.097,0,0,1,Boneless Wings
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Is there a drink item priced around $2.19?,Order Confirmation: Cart is empty. Total is 0. Please confirm the order details and payment information.,4.617,0,0,1,milk; Low Fat Milk; Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Tell me about Subway's restaurant description.,"This order is for a total of 0. The customer has not placed any items in the cart. To confirm the order, the customer should simply click the ""Add to Cart"" button and proceed with the purchase.",6.084,0,0,1,Sandwiches; Salads; Dessert; Snacks
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the address of the Subway location?,"I'm sorry, but I can't assist with that.",1.303,0,0,1,2003 Pease St; Houston; 77003
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the rating for the 10-Piece Boneless Wing Meal?,"The order has been placed, but the customer has not yet confirmed it. The order summary is as follows:
+
+- Total: 0
+- Items: []
+- Total: 0.",3.783,0,0,1,4.42; 4.4; 6194
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has the lowest-priced drink option?,The order is confirmed.,4.413,0,0,1,Subway; $2.19; 2.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the menu price of the 1% Low Fat Milk?,"The order summary is ready. To confirm the order, please provide your name, contact information, and any additional details you would like to know about the product or service.",4.793,0,0,1,$2.19; $2.29; 2.19; 2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the restaurant price range for Subway?,"The order has been placed, but the customer has not yet confirmed the purchase. The order summary is as follows:
+
+- Cart: []
+- Total: 0.",5.789,0,0,1,$; price range
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which items are in the Drinks category?,The order has been placed successfully. The customer has requested a water bottle with a quantity of 1 and a unit price of 3.5. The total amount for the order is 3.5.,6.042,0,0,1,milk; Low Fat Milk
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What city are these menu items from?,"The order for confirmation is as follows:
+
+1. The customer has placed an order for a product or service.
+2. The total amount for the order is 0.
+3. The customer should confirm the order by entering their details or providing additional information.
+
+To ensure the order is processed correctly, the customer should carefully review the details provided and confirm the order before proceeding with the payment and delivery.",7.139,0,0,1,Houston
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the restaurant name for the 10-piece wing meal?,The order has been placed successfully. The customer has confirmed their order.,5.47,0,0,1,American Deli
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Does Subway serve dessert?,"I'm sorry, but I'm Qwen, not a customer service representative. I don't have the ability to perform actions like placing an order or confirming a customer's order. I can only assist with providing information and answering questions. If you have any questions about your order or need assistance with placing an order, please let me know.",8.923,0,0,1,Dessert; Sandwiches; Salads
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant was located in Houston?,The order summary is ready. Please confirm the order details and payment information.,4.536,0,0,1,Subway; American Deli; Houston
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,List the categories offered by Subway.,"The order has been placed successfully, but the customer needs to confirm the details. Please provide the customer with the order details, such as the product name, quantity, price, and any other relevant information.",8.276,0,0,1,Sandwiches; Salads; Dessert; Snacks
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,How much does the milk cost at Subway?,"The order has been placed, but the customer has not yet confirmed it. To ensure the order is processed correctly and the customer's information is up-to-date, please ask the customer to confirm their details and proceed with the order.",4.978,0,0,1,$2.19; $2.29; 2.19; 2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the menu item name for the drink priced at $2.19?,"The order summary for the customer is as follows:
+
+- Total: 0
+- Items: []
+- Summary: The customer has placed a single order with an empty cart, and the total amount is 0.",5.191,0,0,1,1% Low Fat Milk; milk
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Find the restaurant address for American Deli.,"I'm sorry, but I can't assist with that. If you have any other questions or need help with something else, feel free to ask!",1.734,0,0,1,6120 Scott St; Houston; 77021
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has a more expensive wings meal?,"The order has been placed successfully, but the customer needs to confirm the details. Please provide the customer with the order details and ask them to confirm the order.",4.971,0,0,1,American Deli; $14.19; $13.99
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the price of the milk in Houston?,"The order has been placed successfully, but the customer needs to confirm the details. Please provide the order number and any additional information the customer may need.",4.776,0,0,1,$2.19; $2.29; 2.19; 2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which food category contains chicken wings?,"The order has been placed, but the customer has not yet confirmed it. To ensure the order is processed correctly, please ask the customer to confirm the order details and payment information.",5.99,0,0,1,Boneless Wings
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is American Deli known for?,"The order has been placed, but the customer has not yet confirmed it. To ensure the order is processed correctly, you should ask the customer to confirm the details of the order.",5.709,0,0,1,Deli; Chicken; Burgers; Wings
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the restaurant price range of American Deli?,"The order has been placed, but the customer has not yet confirmed it. For a successful order, the customer should provide their name, address, and any other relevant information.",5.044,0,0,1,$
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant serves milk as a drink item?,"The order for the customer has been placed, and the customer has not yet confirmed the order. To ensure the order is processed correctly, the customer should review the order details and confirm the payment information before proceeding with the transaction.",5.422,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the 10-piece wing meal's previous price?,This order is for a single item and the total is 0. The customer should confirm this order by entering their payment information and completing the order.,5.499,0,0,1,$13.99; $14.19; 13.99; 14.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has the milk item in the menu?,"I'm sorry, but I need more information about the order you're referring to. Can you please provide me with the details of the order, such as the items ordered, the quantity, and the total price? This will help me better understand the order and be able to provide you with a more accurate summary of the order for confirmation.",5.787,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,How much is the wings meal at American Deli?,The order has been placed successfully. The customer has confirmed their order.,5.629,0,0,1,$13.99; $14.19; 13.99; 14.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which menu item is a drink and costs about $2?,"The order has been placed, but the customer has not yet confirmed it. You should provide the customer with the option to confirm their order by clicking the ""Confirm"" button or by entering their name and email address.",5.485,0,0,1,milk; 1% Low Fat Milk
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the menu item with the lowest price in the sample?,"The order has been placed, but the customer has not yet confirmed the purchase. To ensure the customer's satisfaction, we should ask them to confirm their order details and payment information.",5.42,0,0,1,milk; $2.19; $2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Is the 10-Piece Boneless Wing Meal a drink or a meal?,The order is confirmed. The customer has placed a single item in the cart with a total amount of 0.,5.14,0,0,1,meal; Boneless Wings
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the city of the Subway restaurant?,"The order has been placed, but the customer has not yet confirmed it. To proceed with the order, the customer must confirm it.",8.0,0,0,1,Houston
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,"Which restaurant serves sandwiches, salads, dessert, and snacks?",The order for confirmation has been received. The customer has not yet confirmed the order.,8.12,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the rating count for the milk item?,The order for confirmation and the customer should confirm the total amount.,4.1,0,0,1,566
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,How many ratings does the wings meal have?,"The order has been placed, but the customer has not yet confirmed the purchase. To ensure a smooth transaction, it's important to ask the customer to confirm their order details.",4.716,0,0,1,6194
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the category for the milk item at Subway?,"The order has been placed, but the customer has not yet confirmed it. Please ask the customer to confirm the order details and payment information before proceeding with the order.",5.08,0,0,1,Drinks
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Tell me the price of the milk at Subway in Houston.,"The order has been placed, but the customer has not yet confirmed it. To ensure the order is processed correctly, you should ask the customer to confirm the details of the order, such as the product name, quantity, price, and any additional instructions. Once the customer has confirmed the details, you can proceed with the order processing.",5.497,0,0,1,$2.19; $2.29; 2.19; 2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has a full meal called boneless wings?,"The order for confirmation and customer confirmation is as follows:
+
+1. Confirm the order by checking the total amount.
+2. Ask the customer to confirm the order by providing their name and the total amount.
+3. If the customer confirms the order, the total amount will be added to the cart.
+4. If the customer does not confirm the order, the total amount will remain unchanged.
+
+This order confirmation process ensures that the customer is aware of the total amount and can make a payment or proceed with the order.",6.554,0,0,1,American Deli
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the name of the restaurant with the wings meal?,"The order for confirmation is as follows:
+
+1. The customer has placed a single item in the cart.
+2. The total amount for the item is 0. 
+
+To ask the customer to confirm the order, you can follow these steps:
+
+1. Display the total amount: ""The total amount for the item is 0. ""
+2. Ask the customer to confirm: ""Do you want to place this order? If so, please confirm the total amount.""
+
+By following these steps, you can clearly communicate the order details and prompt the customer to confirm their decision.",6.161,0,0,1,American Deli
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the lowest-cost item in the sample dataset?,"This order has been placed, but the customer is not yet ready to proceed with the purchase. To ensure the order is processed correctly, the customer should confirm the details of the order and provide any necessary information. Once the customer confirms the order, the order will be processed and shipped.",5.995,0,0,1,milk; $2.19; $2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the price of the drink at Subway?,"The order summary for confirmation is as follows:
+
+- Total: 0
+- Cart: []
+
+The customer has placed an order with a total of 0 yuan, and their order has been placed in the cart.",4.712,0,0,1,$2.19; $2.29; 2.19; 2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What does American Deli serve?,"The order has been placed, but the customer has not yet confirmed it. Please provide the customer with the order details and instructions so they can proceed with the purchase.",4.746,0,0,1,Deli; Chicken; Burgers; Wings
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant is a deli and family meals place?,"This order has been placed, but it is not yet confirmed. The customer should confirm the order details before proceeding.",7.949,0,0,1,American Deli
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,"Which restaurant is in Houston, TX?","The order has been placed, but the customer has not yet confirmed it. To ensure the order is processed correctly, you should ask the customer to confirm the order details.",4.274,0,0,1,Subway; American Deli; Houston
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which item is the most expensive among the sample menu items?,The order has been placed successfully. The customer has confirmed their order.,4.223,0,0,1,10-Piece Boneless Wing Meal; $14.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What categories does American Deli offer?,"The order for confirmation is as follows:
+
+- Customer: Cart: []
+- Order: Total: 0
+
+Customer has not placed any items in the cart, and the total amount of the order is 0.",5.281,0,0,1,Deli; Chicken; Burgers; Wings
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant offers salads and dessert?,The order has been placed successfully. You can proceed with the payment and proceed with the delivery.,5.24,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,How much is the milk at Subway compared to the wing meal?,"As an AI language model, I don't have the ability to perform actions like placing an order or handling transactions. However, I can provide you with a general summary of the order confirmation process:
+
+1. The customer has placed an order on the website or app.
+2. The website or app sends the order details to the server.
+3. The server processes the order and stores it in the database.
+4. The customer receives an order confirmation email or message.
+5. The customer can check the order status and make any necessary changes.
+6. If the customer is satisfied with the order, they can proceed to checkout and complete the transaction.
+7. If the customer is not satisfied with the order, they can request a refund or cancel the order.
+
+To summarize the order confirmation process, the customer should confirm the order details and proceed with the checkout process.",8.121,0,0,1,$2.19; $2.29; $13.99; $14.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What item is sold with drinks and dessert?,"I'm sorry, but I need more information about the order you're referring to. Can you please provide me with the order details so I can summarize it and ask the customer to confirm?",5.978,0,0,1,milk; Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Is the milk item a drink?,"This order has been placed, but it has not been confirmed. The customer should confirm the order by entering their payment information and providing any additional details.",5.0,0,0,1,drink; Drinks
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has 566 ratings for a milk item?,"This order is for a total of 0. The customer has not placed any items in the cart yet. To confirm the order, the customer should click the ""Add to Cart"" button and then proceed to the checkout process.",4.709,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has 6194 ratings for wings?,This order is for a cart with an empty total. The customer should confirm the order by entering their payment information and selecting the desired items.,5.39,0,0,1,American Deli
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the item name and price of the milk?,"The order for confirmation is as follows:
+
+1. The customer has not placed any items in the cart.
+2. The total amount for the order is 0.",4.182,0,0,1,1% Low Fat Milk; $2.19; $2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is another name for the wings meal?,"The order has been placed, but the customer has not yet confirmed it. To ensure the order is processed correctly, you should ask the customer to confirm the order details.",5.044,0,0,1,10-Piece Boneless Wing Meal; Boneless Wings
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the menu category for wings?,"The order has been placed, but the customer needs to confirm the details. Please provide the customer with the order details and ask them to confirm the order.",5.53,0,0,1,Boneless Wings
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the restaurant price range symbol for Subway?,"The order has been placed, and the customer has not yet confirmed the purchase. You should inform the customer that the order has been placed and ask them to confirm the details.",5.498,0,0,1,$
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant offers a more affordable drink?,"The order has been placed successfully. The customer has confirmed the order by clicking the ""Confirm"" button.",4.723,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the menu price of the boneless wing meal at American Deli?,"The order has been placed successfully. The customer has confirmed the order by clicking the ""Confirm"" button.",4.54,0,0,1,$13.99; $14.19; 13.99; 14.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Does Subway offer chicken options?,"This order is for a single item, and the customer has not placed any items in the cart. The total amount is 0. The customer should confirm the order by entering their payment information and confirming the order.",8.434,0,0,1,Sandwiches; Salads; Snacks
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Is the menu item 1% Low Fat Milk from Subway or American Deli?,"The order has been placed, but the customer has not yet confirmed the total amount. To ensure the order is processed correctly, please provide the total amount for the order.",5.493,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,How much is the boneless wings meal at American Deli exactly?,"The order for confirmation is as follows:
+
+1. The customer has not placed any items in the cart.
+2. The total amount for the order is 0.",3.447,0,0,1,$13.99; $14.19; 13.99; 14.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has a dairy drink offering?,"The order has been placed successfully. You can proceed with the payment and proceed with the delivery. If you have any questions or need further assistance, please feel free to ask.",5.372,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the restaurant address for Subway in Houston?,"Sorry, but I can't assist with that.",1.256,0,0,1,2003 Pease St; 77003
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which item is a milk beverage and also a drink category item?,"This order is for a single item, and it has not been placed yet. To confirm the order, the customer should simply click the ""Place Order"" button and provide their order details.",4.599,0,0,1,1% Low Fat Milk; Drinks
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Give me a summary of the Subway restaurant profile.,The order has been placed successfully. The customer can proceed with the checkout process.,7.742,0,0,1,Sandwiches; Salads; Dessert; Snacks; Houston
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which item has the price $2.19 in the menu dataset?,"I'm sorry, but I don't have access to the current order details. I can only provide information about the current order. To confirm the order, I would need to see the order summary and the customer's name. Please provide me with the order summary and the customer's name so that I can assist you further.",6.308,0,0,1,1% Low Fat Milk; milk
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which price is associated with the boneless wing meal?,"The order has been placed, but the customer has not yet confirmed it. To proceed with the order, the customer should click the ""Confirm"" button.",5.219,0,0,1,$13.99; $14.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant is known for sandwiches and snacks?,"The order has been placed, but the customer has not yet confirmed it. To ensure a smooth transaction, you should ask the customer to confirm the order details.",8.377,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Does the menu mention a drink category?,"The order has been placed, but the customer has not yet confirmed the purchase. To ensure the transaction is completed, please provide the customer with the necessary information and instructions.",4.814,0,0,1,Drinks; milk
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the restaurant zip code for Subway?,"The order has been placed, but the customer has not yet confirmed the purchase. To ensure a smooth transaction, you should ask the customer to confirm the order details and payment information.",5.93,0,0,1,77003
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has a wings item rated 4.42?,"The order has been placed, but the customer has not yet confirmed the purchase. To proceed with the order, the customer should click the ""Confirm"" button or select the ""Add to Cart"" option. The total amount should be entered in the ""Total"" field, and the customer should provide their name and any other relevant information. Once the order is confirmed, the customer should proceed to checkout and complete the payment process.",6.757,0,0,1,American Deli
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the rating for the milk item?,This order is for a single item. It is not clear what the customer is ordering or what the total cost is. It is important to ask the customer to confirm their order before proceeding with the payment.,4.697,0,0,1,4.57
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Name the item with the highest rating in the sample.,"The order has been placed, but the customer has not yet confirmed the purchase. The order summary is as follows:
+
+- Total: 0
+- Items: []
+- Customer: Not specified
+- Order ID: Not specified
+
+To confirm the order, the customer should click the ""Confirm"" button or proceed to the checkout page.",8.806,0,0,1,1% Low Fat Milk; 4.57
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the price of the 1% low fat milk from Subway?,"The order has been placed, but the customer has not yet confirmed their purchase. To proceed with the order, the customer should click the ""Add to Cart"" button and proceed with the purchase.",5.277,0,0,1,$2.19; $2.29; 2.19; 2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant sells boneless wings and burgers?,"This order has been placed, but it's not yet confirmed. The customer should review the order details and confirm their payment and shipping information before proceeding.",5.493,0,0,1,American Deli
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the category of the milk at Subway?,This order is for a total of 0 yuan. The customer has not placed any items in the cart.,4.862,0,0,1,Drinks
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,How much does the milk cost in Houston?,This order is for a customer to place an order. The customer has not yet confirmed the order. They should proceed to the next step and confirm the order.,4.225,0,0,1,$2.19; $2.29; 2.19; 2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which item is less expensive: milk or wings?,The order summary is ready. The customer has placed a total of 0 items in the cart. The total cost for the order is 0. You can proceed with the payment process or cancel the order if necessary.,5.75,0,0,1,milk; $2.19; $2.29; $13.99; $14.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the menu item name linked to the $14.19 price?,"The order has been placed, but the customer has not yet confirmed it. To ensure a smooth transaction, it's important to ask the customer to confirm the order details.",5.89,0,0,1,10-Piece Boneless Wing Meal
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the restaurant address for the wings meal?,"Sorry, but I can't assist with that.",1.148,0,0,1,6120 Scott St; Houston; 77021
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which menu item has the rating count 566?,"The order summary has been generated, and the customer has not yet confirmed it. We will send the order to the customer for confirmation.",5.566,0,0,1,1% Low Fat Milk
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which menu item has the rating count 6194?,"The order has been placed, but the customer has not yet confirmed it. To ensure the transaction is completed correctly, the customer should please confirm the order details.",8.155,0,0,1,10-Piece Boneless Wing Meal
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,How much does the drink item from Subway cost?,This order has been placed successfully. The customer has not yet confirmed the order.,4.232,0,0,1,$2.19; $2.29; 2.19; 2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant offers family meals and chicken wings?,"The order has been placed successfully. The customer has confirmed their order by clicking the ""Confirm"" button.",7.955,0,0,1,American Deli
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the average rating for the milk item?,"The order has been placed successfully, and the customer has confirmed it.",4.236,0,0,1,4.57
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has a milk item with 566 ratings?,"The order for confirmation is as follows:
+
+1. The customer has not placed any items in the cart.
+2. The total amount for the order is 0.",4.502,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What does the restaurant description mention for Subway?,"This order for confirmation is for the customer to confirm the total amount of the cart. The customer should simply click the ""Confirm"" button to complete the transaction.",5.303,0,0,1,Sandwiches; Salads; Dessert; Snacks
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,List the food categories at American Deli.,"The order for confirmation is as follows:
+
+1. The customer has not placed any items in the cart.
+2. The total amount for the order is 0.",4.426,0,0,1,Deli; Chicken; Burgers; Wings
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the price and item name of the drink item at Subway?,"The order has been placed, but the customer has not yet confirmed it. To ensure the order is processed correctly, you should ask the customer to confirm the details of the order.",5.727,0,0,1,1% Low Fat Milk; $2.19; $2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant has the higher rated milk item?,"The order for the customer has been placed, and the customer has not yet confirmed the order. The customer should please confirm the order details and payment information before proceeding with the payment.",4.176,0,0,1,Subway; 4.57
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant is more likely to serve fast food?,"This order is for a customer to place a cart. The customer has not placed any items yet. To confirm the order, the customer should click the ""Add to Cart"" button and then proceed to the checkout process. Once the customer confirms the order, they will be prompted to pay for the items they have added to the cart.",6.574,0,0,1,American Deli
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the item name for the wings meal in American Deli?,"The order has been placed successfully, and the customer has confirmed the order. The total amount for the order is 0.",4.799,0,0,1,10-Piece Boneless Wing Meal
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant includes a gym or family meal style?,"The order has been placed, but the customer has not yet confirmed it. To ensure a smooth transaction, it's important to ask the customer to confirm the order details.",5.284,0,0,1,American Deli
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What restaurant is described as sandwiches and salads?,"This order is for the customer to confirm the total amount. The customer can simply click on the ""Confirm"" button to complete the order.",5.018,0,0,1,Subway
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,How much does the milk item cost in total?,"The order has been placed, but the customer has not yet confirmed the purchase. To ensure a smooth transaction, it's recommended to ask the customer to confirm the order details and payment information.",5.354,0,0,1,$2.19; $2.29; 2.19; 2.29
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which restaurant is likely closer to the city center?,"The order for confirmation and customer confirmation is as follows:
+
+1. Order: Cart: [] Total: 0
+2. Customer: Confirm that the order is completed successfully.
+3. Order: Confirm that the total amount is correct.",6.2,0,0,1,Houston
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the menu item price at American Deli for wings?,"The order has been placed, but the customer has not yet confirmed their purchase. To ensure the transaction is completed correctly, please provide the customer with the necessary information and instructions.",5.074,0,0,1,$13.99; $14.19; 13.99; 14.19
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the restaurant type for American Deli?,"The order for the customer has been placed, and the customer has not yet confirmed it. The order has been placed in the cart, and the total amount is 0. The customer should proceed to the checkout process to complete the transaction.",5.209,0,0,1,Deli; Takeout; Fast Food
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Which category contains the milk item?,"The order for confirmation is as follows:
+
+1. The customer has not placed any items in the cart.
+2. The total amount for the order is 0. 
+
+To ask the customer to confirm, you can ask: ""Do you have any items in your cart? If so, please proceed with the purchase. If not, please confirm that you are ready to proceed.""",5.652,0,0,1,Drinks

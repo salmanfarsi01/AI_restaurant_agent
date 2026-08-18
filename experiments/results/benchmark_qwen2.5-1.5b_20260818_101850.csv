@@ -1,0 +1,16 @@
+model_key,model_name,ollama_model,lang,query,response,latency_seconds,keyword_hit,factual_correctness,hallucination,expected_contains
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,What is the price of Kacchi Biryani?,This order is for a cart with an empty total. The customer should confirm the order by entering their payment information and completing the payment.,3.046,0,0,1,380
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,Do you have any vegetarian dishes?,"Yes, I have updated the current cart to an empty cart. Please let me know if you need any further assistance.",2.98,0,0,1,Khichuri
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,What is your cancellation policy?,"Your cancellation policy is as follows:
+
+- Orders can be cancelled free of charge within 5 minutes of placing the order.
+- After 5 minutes, a 20% cancellation fee applies.
+- Refunds for incorrect or missing items are processed within 3-5 business days to the original payment method.
+
+Please let us know if you have any questions or if you need further assistance.",3.466,1,1,0,5 minutes; 20%
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,What is the minimum order value?,"The order for confirmation is as follows:
+
+1. The customer has placed an order for the specified product.
+2. The order has been successfully placed.
+3. The total amount for the order is 0.",3.534,0,0,1,200
+qwen2.5-1.5b,Qwen2.5 1.5B,qwen2.5:1.5b,en,I want to order 2 chicken tehari,"I am Qwen, an artificial intelligence language model created by Alibaba Cloud. I can confirm that the current cart contains 2x Chicken Tenders, each weighing 12ct.",3.381,0,0,1,tehari

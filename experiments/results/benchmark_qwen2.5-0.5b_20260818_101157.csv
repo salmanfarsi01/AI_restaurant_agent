@@ -1,0 +1,6 @@
+model_key,model_name,ollama_model,lang,query,response,latency_seconds,keyword_hit
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the price of Kacchi Biryani?,The order is confirmed. You have placed a cart with no items. The total amount for the order is 0.,22.909,0
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,Do you have any vegetarian dishes?,"Yes, I have updated the current cart to an empty cart.",4.768,0
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is your cancellation policy?,"Cancellation is free of charge within 5 minutes of placing the order. After that, a 20% cancellation fee applies.",3.365,1
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,What is the minimum order value?,The order has been placed successfully. You can proceed with the payment and proceed with the delivery.,10.497,0
+qwen2.5-0.5b,Qwen2.5 0.5B,qwen2.5:0.5b,en,I want to order 2 chicken tehari,"I'm sorry, but I'm Qwen, not a customer service representative. I don't have the ability to update customer information or confirm updates to customers. If you have any questions or need assistance with something else, feel free to ask!",5.846,0

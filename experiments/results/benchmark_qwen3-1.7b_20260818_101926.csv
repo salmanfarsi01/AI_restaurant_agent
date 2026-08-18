@@ -1,0 +1,10 @@
+model_key,model_name,ollama_model,lang,query,response,latency_seconds,keyword_hit,factual_correctness,hallucination,expected_contains
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,What is the price of Kacchi Biryani?,"The order has been placed, but the customer has not yet confirmed the purchase. To ensure a smooth transaction, it's important to ask the customer to confirm the order details.",3.348,0,0,1,380
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,Do you have any vegetarian dishes?,"I'm sorry, but I am currently unable to perform the operation you've described. My current capabilities are limited to generating text based on the input I receive. If you have any specific questions or updates you'd like to share, please feel free to do so and I'll be happy to assist you.",3.897,0,0,1,Khichuri
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,What is your cancellation policy?,"The cancellation policy for Dhaka Spice House is as follows:
+
+- Orders can be cancelled free of charge within 5 minutes of placing the order.
+- After 5 minutes, a 20% cancellation fee applies.
+- Refunds for incorrect or missing items are processed within 3-5 business days to the original payment method.",3.177,1,1,0,5 minutes; 20%
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,What is the minimum order value?,"The order has been placed, but the customer has not yet confirmed it. To proceed with the order, the customer should visit the website or app and click the ""Place Order"" button. Once the order is placed, the customer should confirm it by clicking the ""Confirm"" button.",4.703,0,0,1,200
+qwen3-1.7b,Qwen3 1.7B,qwen3:1.7b,en,I want to order 2 chicken tehari,"Yes, I have confirmed the update to the customer. Please let me know if you need any further assistance.",4.001,0,0,1,tehari
