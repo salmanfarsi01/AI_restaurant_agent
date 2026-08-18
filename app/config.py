@@ -10,24 +10,20 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 MODEL_REGISTRY = {
     "qwen2.5-0.5b": {
-        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
-        "filename": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+        "ollama_model": "qwen2.5:0.5b",
         "label": "Qwen2.5 0.5B",
     },
     "qwen2.5-1.5b": {
-        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
-        "filename": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+        "ollama_model": "qwen2.5:1.5b",
         "label": "Qwen2.5 1.5B",
     },
-    "llama3.2-3b": {
-        "repo_id": "bartowski/Llama-3.2-3B-Instruct-GGUF",
-        "filename": "Llama-3.2-3B-Instruct-Q4_K_M.gguf",
-        "label": "Llama 3.2 3B",
+    "qwen3-0.6b": {
+        "ollama_model": "qwen3:0.6b",
+        "label": "Qwen3 0.6B",
     },
-    "phi3.5-mini": {
-        "repo_id": "bartowski/Phi-3.5-mini-instruct-GGUF",
-        "filename": "Phi-3.5-mini-instruct-Q4_K_M.gguf",
-        "label": "Phi-3.5 Mini",
+    "qwen3-1.7b": {
+        "ollama_model": "qwen3:1.7b",
+        "label": "Qwen3 1.7B",
     },
 }
 
@@ -37,12 +33,12 @@ class Settings(BaseSettings):
     telegram_bot_token: str = ""
 
     # Local-first model selection: keep simple until agent + Telegram are added.
-    llm_backend: str = "huggingface"
+    llm_backend: str = "ollama"
     selected_model: str = "qwen2.5-1.5b"
 
     # Ollama
     ollama_base_url: str = "http://localhost:11434"
-    ollama_model: str = "llama3.1:8b"
+    ollama_model: str = "qwen2.5:1.5b"
 
     # HuggingFace (used when llm_backend == "huggingface")
     hf_llm_model: str = "Qwen/Qwen3-8B"

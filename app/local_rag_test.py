@@ -35,7 +35,13 @@ def run_local_query(query: str, k: int = 4, model_key: str | None = None, use_ll
     model_key = model_key or settings.selected_model
     model_cfg = settings.get_selected_model_config(model_key)
 
-    print(f"Selected model: {model_key} ({model_cfg['label']})")
+    if settings.llm_backend == "huggingface":
+        print(f"Selected backend: huggingface")
+        print(f"HF model: {settings.hf_llm_model}")
+    else:
+        print(f"Selected backend: ollama")
+        print(f"Selected model: {model_key} ({model_cfg['label']})")
+        print(f"Ollama model: {model_cfg.get('ollama_model', settings.ollama_model)}")
     print(f"Qdrant collection: {settings.qdrant_collection}")
     print(f"Query: {query}")
     print()
@@ -46,7 +52,11 @@ def run_local_query(query: str, k: int = 4, model_key: str | None = None, use_ll
         _print_doc(doc, index)
 
     if use_llm:
-        llm = get_llm(model_name=model_cfg.get("filename") or model_cfg.get("repo_id"))
+        if settings.llm_backend == "huggingface":
+            llm_model_name = settings.hf_llm_model
+        else:
+            llm_model_name = model_cfg.get("ollama_model") or settings.ollama_model
+        llm = get_llm(model_name=llm_model_name)
         context = "\n\n".join(doc.page_content for doc in docs)
         prompt = (
             "Use only the context below to answer the user's question. "
