@@ -63,7 +63,10 @@ class SheetsService:
 
         if client:
             try:
-                sheet = client.open(settings.google_sheet_title)
+                if settings.google_sheet_id:
+                    sheet = client.open_by_key(settings.google_sheet_id)
+                else:
+                    sheet = client.open(settings.google_sheet_title)
 
                 # 1. Daily Tab Management
                 try:
@@ -179,7 +182,10 @@ class SheetsService:
 
         if client:
             try:
-                sheet = client.open(settings.google_sheet_title)
+                if settings.google_sheet_id:
+                    sheet = client.open_by_key(settings.google_sheet_id)
+                else:
+                    sheet = client.open(settings.google_sheet_title)
                 leads_sheet = sheet.worksheet("Leads_Master")
                 records = leads_sheet.get_all_records()
                 for r in records:

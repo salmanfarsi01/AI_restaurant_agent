@@ -264,6 +264,13 @@ class OrderService:
     # -------------------------------------------------------------------------
     @staticmethod
     def calculate_totals(cart: List[Dict[str, Any]]) -> Dict[str, Decimal]:
+        if not cart:
+            return {
+                "subtotal": Decimal("0.00"),
+                "delivery_fee": Decimal("0.00"),
+                "discount_amount": Decimal("0.00"),
+                "total_amount": Decimal("0.00"),
+            }
         subtotal = Decimal("0.00")
         for item in cart:
             qty = Decimal(str(item["quantity"]))

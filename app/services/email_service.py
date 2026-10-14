@@ -193,16 +193,59 @@ class EmailService:
             log.exception("Failed to send verification email via SMTP: %s", e)
             return False
 
-    @staticmethod
-    def send_verification_email_sync(order_dict: Dict[str, Any], token: str) -> bool:
-        """Synchronous wrapper for thread/background execution."""
+    @classmethod
+    def send_verification_email_sync(cls, order_dict: Dict[str, Any], token: str) -> bool:
+        """Synchronous dispatcher that never deadlocks asyncio event loops."""
+        recipient = order_dict.get("customer_email")
+        order_code = order_dict.get("order_code", "UNKNOWN")
+        html_content = cls.render_verification_email(order_dict, token)
+        verification_url = f"{settings.server_base_url}/orders/verify?token={token}"
+
+        # 1. Mock fallback mode or missing SMTP credentials -> instant synchronous write
+        if settings.smtp_mock_mode or not settings.smtp_host or not settings.smtp_user:
+            Path(settings.emails_dir).mkdir(parents=True, exist_ok=True)
+            mock_file = Path(settings.emails_dir) / f"verification_{order_code}.html"
+            with open(mock_file, "w", encoding="utf-8") as f:
+                f.write(html_content)
+
+            log.info("=" * 70)
+            log.info(" [MOCK EMAIL DISPATCHED]")
+            log.info(" Recipient: %s", recipient)
+            log.info(" Order Code: %s", order_code)
+            log.info(" File: %s", mock_file)
+            log.info(" Verification Link: %s", verification_url)
+            log.info("=" * 70)
+            return True
+
+        # 2. Real SMTP dispatch using standard smtplib (thread-safe, no asyncio deadlock)
         try:
-            loop = asyncio.get_event_loop()
-            if loop.is_running():
-                return asyncio.run_coroutine_threadsafe(
-                    EmailService.send_verification_email(order_dict, token), loop
-                ).result(timeout=10)
-            else:
-                return loop.run_until_complete(EmailService.send_verification_email(order_dict, token))
-        except RuntimeError:
-            return asyncio.run(EmailService.send_verification_email(order_dict, token))
+            import smtplib
+            from email.mime.multipart import MIMEMultipart
+            from email.mime.text import MIMEText
+
+            msg = MIMEMultipart("alternative")
+            msg["Subject"] = f"Action Required: Confirm Your Order {order_code} - {settings.restaurant_name}"
+            msg["From"] = f"{settings.smtp_from_name} <{settings.smtp_from_email}>"
+            msg["To"] = recipient
+
+            text_part = MIMEText(
+                f"Hello {order_dict.get('customer_name')},\n\n"
+                f"Please confirm your order by visiting: {verification_url}\n\n"
+                f"Thank you,\n{settings.restaurant_name}",
+                "plain",
+            )
+            html_part = MIMEText(html_content, "html")
+            msg.attach(text_part)
+            msg.attach(html_part)
+
+            with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=10) as server:
+                if settings.smtp_use_tls:
+                    server.starttls()
+                server.login(settings.smtp_user, settings.smtp_password)
+                server.send_message(msg)
+
+            log.info("Verification email sent via SMTP to %s", recipient)
+            return True
+        except Exception as e:
+            log.exception("Failed to send verification email via SMTP: %s", e)
+            return False

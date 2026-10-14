@@ -168,9 +168,40 @@ def load_menu_csv_documents(csv_path: Path | None = None) -> list[Document]:
     return _menu_item_documents(current) + _restaurant_documents(current)
 
 
+def _load_database_menu_docs() -> list[Document]:
+    """Loads dishes from SQLite MenuItem table so local RAG knows all active dishes."""
+    docs = []
+    try:
+        from app.database.database import SessionLocal
+        from app.database.models import MenuItem
+        db = SessionLocal()
+        items = db.query(MenuItem).filter(MenuItem.is_available == True).all()
+        for it in items:
+            content = f"Restaurant: Dhaka Spice House\nDish: {it.name}\nCategory: {it.category}\nPrice: ৳{float(it.price):.2f}\nDescription: {it.description}"
+            docs.append(Document(
+                page_content=content,
+                metadata={
+                    "source": "menu",
+                    "restaurant_name": "Dhaka Spice House",
+                    "category": it.category,
+                    "price": float(it.price),
+                    "item_code": it.item_code,
+                }
+            ))
+        db.close()
+    except Exception as e:
+        pass
+    return docs
+
+
 def load_all_documents() -> list[Document]:
-    """Menu/restaurant docs from the CSV (English) + policy docs (EN + BN)."""
-    return load_menu_csv_documents() + _load_policy_docs()
+    """Menu/restaurant docs from the CSV (English) + database menu items + policy docs (EN + BN)."""
+    csv_docs = []
+    try:
+        csv_docs = load_menu_csv_documents()
+    except Exception:
+        pass
+    return csv_docs + _load_database_menu_docs() + _load_policy_docs()
 
 
 if __name__ == "__main__":

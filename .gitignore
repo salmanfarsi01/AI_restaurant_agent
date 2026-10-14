@@ -31,12 +31,19 @@ env/
 
 
 # =====================
-# Environment Variables
+# Environment Variables & Credentials
 # =====================
 
 .env
 .env.*
 !.env.example
+credentials.json
+service_account.json
+*.pem
+*.key
+data/emails/
+data/receipts/
+data/sheets_backup/
 
 
 # =====================

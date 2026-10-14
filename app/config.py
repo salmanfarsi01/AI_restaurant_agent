@@ -18,8 +18,8 @@ class Settings(BaseSettings):
     # --- LLM Engine (Groq default) ---
     llm_backend: str = "groq"  # "groq" | "ollama" | "huggingface"
     groq_api_key: str = ""
-    groq_model: str = "llama-3.3-70b-versatile"
-    groq_fast_model: str = "llama-3.1-8b-instant"
+    groq_model: str = "qwen/qwen3.8-27b"
+    groq_fast_model: str = "qwen/qwen3.8-27b"
 
     # --- Ollama / Local fallback ---
     ollama_base_url: str = "http://localhost:11434"
@@ -55,9 +55,10 @@ class Settings(BaseSettings):
     receipts_dir: str = "./data/receipts"
 
     # --- Google Sheets CRM & Reporting ---
-    google_sheets_enabled: bool = False
+    google_sheets_enabled: bool = True
     google_service_account_file: str = "./credentials.json"
     google_sheet_title: str = "Dhaka Spice House Orders & Leads"
+    google_sheet_id: str = "1m-xdTMn0B6ATc0PxRkApDBq6YPzuC6X9DCvcDJBlPdk"
     sheets_backup_dir: str = "./data/sheets_backup"
 
     # --- Telegram Bot ---

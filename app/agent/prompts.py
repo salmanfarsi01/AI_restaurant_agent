@@ -67,19 +67,23 @@ Message: {message}
 JSON:"""
 
 CART_ACTION_PROMPT = """You are an order item extractor. Given the user message and the available menu context,
-extract what the customer wants to add, remove, or modify.
+extract what dishes the customer wants to add, modify, or remove.
+Customers can order ONE OR MULTIPLE items in a single message (e.g. "2 kacchi biryani and 2 special borhani").
 Return strict JSON with this schema:
 {{
   "action": "add" | "modify" | "remove" | "clear" | "none",
-  "item_name": string,
-  "quantity": int
+  "items": [
+    {{"item_name": string, "quantity": int}}
+  ]
 }}
 
 Rules:
-1. Match the dish name as closely as possible to the menu context.
-2. If the user specifies an item without quantity, default quantity to 1.
-3. If no dish or order change is mentioned, set action to "none".
-4. Output ONLY valid JSON.
+1. Extract ALL dishes mentioned in the message into the items list.
+2. Match item_name as closely as possible to the menu context (e.g. "kacchi biryani" -> "Kachchi Biryani (Mutton)", "special borhani" -> "Special Borhani (500ml)").
+3. If quantity is not mentioned, default quantity to 1.
+4. If the customer wants to clear their cart, set action to "clear" and items to [].
+5. If no dish is mentioned, set action to "none" and items to [].
+6. Output ONLY valid JSON.
 
 Menu Context:
 {context}

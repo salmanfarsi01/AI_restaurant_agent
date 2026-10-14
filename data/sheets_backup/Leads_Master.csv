@@ -1,3 +1,5 @@
 Email,Full Name,Phone,First Order Date,Last Order Date,Total Orders,Lifetime Spend,Subscribed
 tariqul@example.com,Tariqul Islam,01755112233,2026-10-14 03:57:59,2026-10-14 03:57:59,1,৳760.00,TRUE
 tariqul@example.com,Tariqul Islam,01755112233,2026-10-14 03:58:24,2026-10-14 03:58:24,1,৳760.00,TRUE
+tariqul@example.com,Tariqul Islam,01755112233,2026-10-14 04:42:32,2026-10-14 04:42:32,1,৳760.00,TRUE
+testuser@example.com,Test User,01700000000,2026-10-14 05:32:46,2026-10-14 05:32:46,1,৳790.00,TRUE

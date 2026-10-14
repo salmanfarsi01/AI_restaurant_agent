@@ -4,7 +4,7 @@ Integrates Groq LLM with transactional OrderService and EmailService.
 """
 import json
 import re
-from typing import Dict, Any
+from typing import Dict, Any, List, Tuple
 from langchain_core.messages import HumanMessage
 
 from app.agent.state import AgentState
@@ -108,13 +108,8 @@ def handle_menu_inquiry(state: AgentState) -> Dict[str, Any]:
     return {"response": answer, "retrieved_context": context}
 
 
-def handle_order_update(state: AgentState) -> Dict[str, Any]:
-    """Parses order dish & quantity, updates persistent cart, and checks remaining slots."""
-    user_id = state.get("user_id", "default_user")
-    lang = state.get("language", "en")
-    msg = state.get("user_message", "")
-
-    # Build concise menu context for extraction
+def _extract_and_apply_cart_items(user_id: str, msg: str, lang: str) -> Tuple[str, List[Dict[str, Any]]]:
+    """Helper that parses dishes/quantities from text (single or multi-item) and updates cart."""
     menu_items = OrderService.get_menu_by_category()
     menu_list = []
     for cat, items in menu_items.items():
@@ -138,39 +133,72 @@ def handle_order_update(state: AgentState) -> Dict[str, Any]:
                 pass
 
     if not isinstance(parsed, dict):
-        parsed = {"action": "none", "item_name": "", "quantity": 1}
+        parsed = {"action": "none", "items": []}
 
     action = parsed.get("action", "none")
-    item_name = parsed.get("item_name", "")
-    quantity = int(parsed.get("quantity", 1) or 1)
+    items = parsed.get("items", [])
+    if not items and parsed.get("item_name"):
+        items = [{"item_name": parsed.get("item_name"), "quantity": int(parsed.get("quantity", 1) or 1)}]
 
     cart = OrderService.get_cart(user_id)
-    response_msg = ""
+    added_feedbacks = []
 
     if action == "clear":
         OrderService.clear_cart(user_id)
-        response_msg = "আপনার কার্ট খালি করা হয়েছে।" if lang == "bn" else "Your cart has been cleared."
-    elif action in ("add", "modify") and item_name:
-        success, feedback, updated_cart = OrderService.add_to_cart(user_id, item_name, quantity)
-        cart = updated_cart
-        response_msg = feedback
-    elif action == "remove" and item_name:
-        success, feedback, updated_cart = OrderService.modify_cart_item(user_id, item_name, 0)
-        cart = updated_cart
-        response_msg = feedback
-    else:
-        # Fallback keyword match
-        matched_item = OrderService.find_menu_item(msg)
-        if matched_item:
-            success, feedback, updated_cart = OrderService.add_to_cart(user_id, matched_item.name, 1)
-            cart = updated_cart
-            response_msg = feedback
+        msg_out = "আপনার কার্ট খালি করা হয়েছে।" if lang == "bn" else "Your cart has been cleared."
+        return msg_out, []
+
+    if action in ("add", "modify") and items:
+        for it in items:
+            it_name = it.get("item_name", "").strip()
+            it_qty = int(it.get("quantity", 1) or 1)
+            if it_name:
+                success, feedback, updated_cart = OrderService.add_to_cart(user_id, it_name, it_qty)
+                cart = updated_cart
+                if success:
+                    added_feedbacks.append(f"{it_qty}x {it_name}")
+
+    elif action == "remove" and items:
+        for it in items:
+            it_name = it.get("item_name", "").strip()
+            if it_name:
+                success, feedback, updated_cart = OrderService.modify_cart_item(user_id, it_name, 0)
+                cart = updated_cart
+                added_feedbacks.append(f"Removed {it_name}")
+
+    if added_feedbacks:
+        if action == "remove":
+            response_msg = ", ".join(added_feedbacks)
         else:
             response_msg = (
-                "আমি আপনার অর্ডার বুঝতে পারছি না। দয়া করে মেনু থেকে খাবারের নাম বলুন।"
+                f"কার্টে যোগ করা হয়েছে: {', '.join(added_feedbacks)}"
                 if lang == "bn"
-                else "I couldn't identify which dish you want to order. Could you please specify the dish name from our menu?"
+                else f"Added to your cart: {', '.join(added_feedbacks)}"
             )
+        return response_msg, cart
+
+    # Fallback keyword match if nothing was parsed
+    matched_item = OrderService.find_menu_item(msg)
+    if matched_item:
+        success, feedback, updated_cart = OrderService.add_to_cart(user_id, matched_item.name, 1)
+        return feedback, updated_cart
+
+    return "", cart
+
+
+def handle_order_update(state: AgentState) -> Dict[str, Any]:
+    """Parses order dish & quantity, updates persistent cart, and checks remaining slots."""
+    user_id = state.get("user_id", "default_user")
+    lang = state.get("language", "en")
+    msg = state.get("user_message", "")
+
+    response_msg, cart = _extract_and_apply_cart_items(user_id, msg, lang)
+    if not response_msg and not cart:
+        response_msg = (
+            "আমি আপনার অর্ডার বুঝতে পারছি না। দয়া করে মেনু থেকে খাবারের নাম বলুন।"
+            if lang == "bn"
+            else "I couldn't identify which dish you want to order. Could you please specify the dish name from our menu?"
+        )
 
     # Calculate remaining missing slots
     missing = OrderService.get_missing_slots(user_id)
@@ -225,12 +253,17 @@ def handle_customer_info(state: AgentState) -> Dict[str, Any]:
     if name_match and not extracted.get("customer_name"):
         extracted["customer_name"] = name_match.group(1).split(",")[0].strip()
 
-    addr_match = re.search(r"(?:address[:\s]+|location[:\s]+|to[:\s]+)(.+)$", msg, re.IGNORECASE)
+    addr_match = re.search(r"(?:address[:\s]+|location[:\s]+|delivery[:\s]+|to[:\s]+)(.+)$", msg, re.IGNORECASE)
     if addr_match and not extracted.get("delivery_address"):
         extracted["delivery_address"] = addr_match.group(1).strip()
 
     info = OrderService.update_customer_info(user_id, extracted)
-    cart = OrderService.get_cart(user_id)
+
+    # If the user also specified food items along with details in the same turn:
+    added_msg, cart = _extract_and_apply_cart_items(user_id, msg, lang)
+    if not cart:
+        cart = OrderService.get_cart(user_id)
+
     missing = OrderService.get_missing_slots(user_id)
 
     if not cart:
@@ -241,27 +274,31 @@ def handle_customer_info(state: AgentState) -> Dict[str, Any]:
         )
         return {"customer_info": info, "response": reply}
 
+    totals = OrderService.calculate_totals(cart)
+    cart_summary = "\n".join(f"• {c['quantity']}x {c['name']} (৳{c['line_total']})" for c in cart)
+
     if not missing:
         # All slots ready! Suggest checkout review
-        totals = OrderService.calculate_totals(cart)
         if lang == "bn":
             reply = (
-                f"ধন্যবাদ! আপনার সকল তথ্য পাওয়া গেছে।\n"
+                f"ধন্যবাদ! আপনার সকল তথ্য পাওয়া গেছে।\n\n"
+                f"🛒 **অর্ডারের বিবরণ:**\n{cart_summary}\n"
+                f"**সর্বমোট বিল: ৳{totals['total_amount']} (ক্যাশ অন ডেলিভারি)**\n\n"
                 f"👤 নাম: {info.get('customer_name')}\n"
                 f"📍 ঠিকানা: {info.get('delivery_address')}\n"
                 f"✉️ ইমেইল: {info.get('customer_email')}\n"
                 f"📞 ফোন: {info.get('customer_phone')}\n\n"
-                f"অর্ডার মোট: ৳{totals['total_amount']} (ক্যাশ অন ডেলিভারি)\n\n"
                 f"আপনি কি কনফার্মেশন ইমেইল পাঠাতে চান? বলুন 'হ্যাঁ' বা 'অর্ডার কনফার্ম করুন'।"
             )
         else:
             reply = (
-                f"Great! We have all your order details:\n"
+                f"Great! We have all your order details:\n\n"
+                f"🛒 **Your Items:**\n{cart_summary}\n"
+                f"**Grand Total: ৳{totals['total_amount']} (Cash on Delivery)**\n\n"
                 f"👤 Name: {info.get('customer_name')}\n"
                 f"📍 Address: {info.get('delivery_address')}\n"
                 f"✉️ Email: {info.get('customer_email')}\n"
                 f"📞 Phone: {info.get('customer_phone')}\n\n"
-                f"Grand Total: ৳{totals['total_amount']} (Cash on Delivery)\n\n"
                 f"Ready to send your verification email? Reply 'confirm' or 'place order'."
             )
         return {"customer_info": info, "response": reply}
@@ -316,8 +353,12 @@ def handle_checkout_review(state: AgentState) -> Dict[str, Any]:
     if not success or not order:
         return {"response": f"Sorry, could not process order: {msg}"}
 
-    # Dispatch email
-    email_dispatched = EmailService.send_verification_email_sync(order.to_dict(), order.confirmation_token)
+    # Dispatch email safely
+    email_dispatched = False
+    try:
+        email_dispatched = EmailService.send_verification_email_sync(order.to_dict(), order.confirmation_token)
+    except Exception as e:
+        log.exception("Failed to dispatch verification email: %s", e)
 
     totals = OrderService.calculate_totals(cart)
     cart_lines = "\n".join(f"• {c['quantity']}x {c['name']} (৳{c['line_total']})" for c in cart)
