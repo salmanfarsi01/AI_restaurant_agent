@@ -11,6 +11,7 @@ from app.agent.state import AgentState
 from app.agent import prompts
 from app.models.llm_loader import get_llm
 from app.rag.retriever import retrieve, format_docs_for_prompt
+from app.config import settings
 from app.services.order_service import OrderService
 from app.services.email_service import EmailService
 from app.utils.logger import get_logger
@@ -362,6 +363,7 @@ def handle_checkout_review(state: AgentState) -> Dict[str, Any]:
 
     totals = OrderService.calculate_totals(cart)
     cart_lines = "\n".join(f"• {c['quantity']}x {c['name']} (৳{c['line_total']})" for c in cart)
+    verify_url = f"{settings.server_base_url}/orders/verify?token={order.confirmation_token}"
 
     if lang == "bn":
         reply = (
@@ -373,8 +375,10 @@ def handle_checkout_review(state: AgentState) -> Dict[str, Any]:
             f"**সর্বমোট বিল: ৳{totals['total_amount']} (ক্যাশ অন ডেলিভারি)**\n\n"
             f"ডেলিভারি ঠিকানা: {order.delivery_address}\n"
             f"ফোন: {order.customer_phone}\n\n"
-            f"✉️ আমরা আপনার ইমেইল (`{order.customer_email}`)-এ একটি ভেরিফিকেশন লিংক পাঠিয়েছি।\n"
-            f"দয়া করে ইমেইলটি চেক করুন এবং **'Confirm & Place Order'** বাটনে ক্লিক করুন যাতে কিচেন আপনার খাবার প্রস্তুত শুরু করতে পারে!"
+            f"✉️ আমরা আপনার ইমেইল (`{order.customer_email}`)-এ একটি ভেরিফিকেশন লিংক পাঠিয়েছি।\n\n"
+            f"👉 **অর্ডার নিশ্চিত করতে সরাসরি এই লিংকে ক্লিক করুন:**\n"
+            f"{verify_url}\n\n"
+            f"লিংকটিতে গিয়ে **'Confirm Order Now'** চাপুন যাতে কিচেন আপনার খাবার প্রস্তুত শুরু করতে পারে!"
         )
     else:
         reply = (
@@ -386,8 +390,10 @@ def handle_checkout_review(state: AgentState) -> Dict[str, Any]:
             f"**Grand Total: ৳{totals['total_amount']} (Cash on Delivery)**\n\n"
             f"Deliver To: {order.delivery_address}\n"
             f"Phone: {order.customer_phone}\n\n"
-            f"✉️ We have dispatched a verification email to **{order.customer_email}**.\n"
-            f"Please check your inbox and click **'Confirm & Place Order'** so the kitchen can begin preparing your meal immediately!"
+            f"✉️ We have dispatched a verification email to **{order.customer_email}**.\n\n"
+            f"👉 **Tap directly here to review & confirm your order:**\n"
+            f"{verify_url}\n\n"
+            f"Please click **'Confirm Order Now'** on that page so the kitchen can begin preparing your meal immediately!"
         )
 
     return {

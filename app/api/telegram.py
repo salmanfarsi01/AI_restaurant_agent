@@ -36,11 +36,16 @@ MAIN_KEYBOARD = ReplyKeyboardMarkup(
 
 
 async def send_safe_message(update: Update, text: str, reply_markup=None):
-    """Sends message with Markdown parsing, safely falling back to plain text if syntax fails."""
+    """Sends message with Markdown parsing, safely falling back to plain text and keyboard."""
     try:
         await update.message.reply_text(text, parse_mode="Markdown", reply_markup=reply_markup)
-    except Exception:
-        await update.message.reply_text(text, reply_markup=reply_markup)
+    except Exception as e1:
+        log.warning("send_safe_message Markdown failed (%s); trying plain text with markup", e1)
+        try:
+            await update.message.reply_text(text, reply_markup=reply_markup)
+        except Exception as e2:
+            log.warning("send_safe_message markup failed (%s); falling back to default keyboard", e2)
+            await update.message.reply_text(text, reply_markup=MAIN_KEYBOARD)
 
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -161,18 +166,20 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         reply_text = result.get("response", "Sorry, I had trouble processing that. Please try again.")
 
-        # Check if an order was just created and needs confirmation
+        # Check if an order was just created in this turn and needs confirmation button
         inline_markup = None
-        order_code = result.get("order_code")
-        if order_code:
+        if result.get("order_draft_created") and result.get("order_code"):
+            order_code = result.get("order_code")
             db = SessionLocal()
             try:
                 order = db.query(Order).filter(Order.order_code == order_code).first()
                 if order and order.confirmation_token:
                     verify_url = f"{settings.server_base_url}/orders/verify?token={order.confirmation_token}"
-                    inline_markup = InlineKeyboardMarkup([
-                        [InlineKeyboardButton("✅ Review & Confirm Order", url=verify_url)]
-                    ])
+                    # Telegram Bot API strictly rejects localhost and 127.0.0.1 in InlineKeyboardButton url parameter
+                    if verify_url.startswith("https://") and "localhost" not in verify_url and "127.0.0.1" not in verify_url:
+                        inline_markup = InlineKeyboardMarkup([
+                            [InlineKeyboardButton("✅ Review & Confirm Order", url=verify_url)]
+                        ])
             finally:
                 db.close()
 

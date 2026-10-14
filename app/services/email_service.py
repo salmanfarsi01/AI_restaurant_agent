@@ -77,8 +77,8 @@ VERIFICATION_EMAIL_TEMPLATE = """
           <tr>
             <td><strong>{{ item.item_name }}</strong></td>
             <td style="text-align: center;">{{ item.quantity }}</td>
-            <td style="text-align: right;">৳{{ "%.2f"|format(item.unit_price) }}</td>
-            <td style="text-align: right;">৳{{ "%.2f"|format(item.line_total) }}</td>
+            <td style="text-align: right;">৳{{ "%.2f"|format(item.unit_price|default(0.0)) }}</td>
+            <td style="text-align: right;">৳{{ "%.2f"|format(item.line_total|default(0.0)) }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -87,15 +87,15 @@ VERIFICATION_EMAIL_TEMPLATE = """
       <table class="totals-table">
         <tr>
           <td>Subtotal:</td>
-          <td style="text-align: right;">৳{{ "%.2f"|format(subtotal) }}</td>
+          <td style="text-align: right;">৳{{ "%.2f"|format(subtotal|default(0.0)) }}</td>
         </tr>
         <tr>
           <td>Delivery Fee:</td>
-          <td style="text-align: right;">৳{{ "%.2f"|format(delivery_fee) }}</td>
+          <td style="text-align: right;">৳{{ "%.2f"|format(delivery_fee|default(0.0)) }}</td>
         </tr>
         <tr class="grand-total">
           <td>Grand Total:</td>
-          <td style="text-align: right;">৳{{ "%.2f"|format(total_amount) }}</td>
+          <td style="text-align: right;">৳{{ "%.2f"|format(total_amount|default(0.0)) }}</td>
         </tr>
       </table>
 
