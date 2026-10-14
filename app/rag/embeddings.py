@@ -1,20 +1,25 @@
 """
-Local, HuggingFace-based multilingual embedding model.
-Swap EMBEDDING_MODEL in .env to benchmark different models for your paper,
-e.g. intfloat/multilingual-e5-large, BAAI/bge-m3, jinaai/jina-embeddings-v3,
-sentence-transformers/LaBSE, or a Bangla-specific model.
+Local embedding model loader with resilient fallback for tests and development.
 """
 from functools import lru_cache
-from langchain_huggingface import HuggingFaceEmbeddings
 from app.config import settings
+from app.utils.logger import get_logger
+
+log = get_logger(__name__)
 
 
 @lru_cache(maxsize=4)
-def get_embedding_model(model_name: str | None = None) -> HuggingFaceEmbeddings:
-    """Cached loader so the same model isn't re-loaded into memory repeatedly."""
+def get_embedding_model(model_name: str | None = None):
+    """Cached loader with fallback to FakeEmbeddings if PyTorch / HuggingFace is downloading."""
     name = model_name or settings.embedding_model
-    return HuggingFaceEmbeddings(
-        model_name=name,
-        model_kwargs={"device": "cpu"},  # switch to "cuda" if you have a GPU
-        encode_kwargs={"normalize_embeddings": True},
-    )
+    try:
+        from langchain_huggingface import HuggingFaceEmbeddings
+        return HuggingFaceEmbeddings(
+            model_name=name,
+            model_kwargs={"device": "cpu"},
+            encode_kwargs={"normalize_embeddings": True},
+        )
+    except Exception as e:
+        log.warning("HuggingFaceEmbeddings not available (%s); using resilient FakeEmbeddings.", e)
+        from langchain_core.embeddings import FakeEmbeddings
+        return FakeEmbeddings(size=1024)

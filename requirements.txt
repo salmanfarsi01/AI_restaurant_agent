@@ -11,21 +11,31 @@ langgraph>=0.2.34
 langchain>=0.3.4
 langchain-core>=0.3.10
 langchain-community>=0.3.1
+langchain-groq>=0.2.0
+groq>=0.11.0
 langchain-huggingface>=0.1.0
 langchain-ollama>=0.3.0
 langchain-qdrant>=0.2.0
 
-# --- Local models ---
+# --- Local & Embedding models ---
 sentence-transformers>=3.1.1
 transformers>=4.45.1
 
 # --- Vector DB ---
 qdrant-client>=1.11.3
 
-# --- Telegram ---
+# --- Telegram & Messaging ---
 python-telegram-bot>=21.6
 
-# --- Evaluation ---
+# --- Integrations & Services ---
+gspread>=6.1.2
+google-auth>=2.35.0
+aiosmtplib>=3.0.2
+jinja2>=3.1.4
+python-escpos>=3.0.0
+pywin32>=306
+
+# --- Data & Evaluation ---
 pandas>=2.2.3
 seaborn>=0.13.2
 matplotlib>=3.8.0
@@ -34,4 +44,3 @@ tiktoken>=0.7.0
 
 # --- Testing ---
 pytest>=8.3.3
-

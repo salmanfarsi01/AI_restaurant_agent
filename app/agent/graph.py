@@ -1,70 +1,68 @@
 """
-Builds the LangGraph state graph:
-
-          START
-            |
-   detect_language
-            |
-   classify_intent
-            |
-     +------+-------------------+------------------+
-     |                          |                   |
-  order/checkout       menu_question/policy_q     general
-     |                          |                   |
- handle_order              rag_retrieve             |
-     |                          |                   |
-     +------------ generate_response ---------------+
-                            |
-                           END
-
-Per-user memory is handled by LangGraph's checkpointer, keyed on thread_id
-(we use the Telegram user id as thread_id) -- so the agent remembers each
-user's ongoing cart/conversation across turns.
+LangGraph Workflow: Connects language detection, intent routing,
+progressive menu greeting, slot collection, and checkout review.
 """
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
+
 from app.agent.state import AgentState
 from app.agent import nodes
 
 
-def _route_after_intent(state: AgentState) -> str:
+def _route_intent(state: AgentState) -> str:
     intent = state.get("intent", "general")
-    if intent in ("order", "checkout"):
-        return "handle_order"
-    if intent in ("menu_question", "policy_question"):
-        return "rag_retrieve"
-    return "generate_response"
+    valid_routes = {
+        "greeting": "handle_greeting",
+        "menu_inquiry": "handle_menu_inquiry",
+        "order_update": "handle_order_update",
+        "provide_info": "handle_customer_info",
+        "checkout_review": "handle_checkout_review",
+        "general": "handle_general",
+    }
+    return valid_routes.get(intent, "handle_general")
 
 
 def build_graph():
     graph = StateGraph(AgentState)
 
+    # Core NLU nodes
     graph.add_node("detect_language", nodes.detect_language)
     graph.add_node("classify_intent", nodes.classify_intent)
-    graph.add_node("handle_order", nodes.handle_order)
-    graph.add_node("rag_retrieve", nodes.rag_retrieve)
-    graph.add_node("generate_response", nodes.generate_response)
 
+    # Action / Dialogue nodes
+    graph.add_node("handle_greeting", nodes.handle_greeting)
+    graph.add_node("handle_menu_inquiry", nodes.handle_menu_inquiry)
+    graph.add_node("handle_order_update", nodes.handle_order_update)
+    graph.add_node("handle_customer_info", nodes.handle_customer_info)
+    graph.add_node("handle_checkout_review", nodes.handle_checkout_review)
+    graph.add_node("handle_general", nodes.handle_general)
+
+    # Edges
     graph.add_edge(START, "detect_language")
     graph.add_edge("detect_language", "classify_intent")
 
     graph.add_conditional_edges(
         "classify_intent",
-        _route_after_intent,
+        _route_intent,
         {
-            "handle_order": "handle_order",
-            "rag_retrieve": "rag_retrieve",
-            "generate_response": "generate_response",
+            "handle_greeting": "handle_greeting",
+            "handle_menu_inquiry": "handle_menu_inquiry",
+            "handle_order_update": "handle_order_update",
+            "handle_customer_info": "handle_customer_info",
+            "handle_checkout_review": "handle_checkout_review",
+            "handle_general": "handle_general",
         },
     )
 
-    graph.add_edge("handle_order", "generate_response")
-    graph.add_edge("rag_retrieve", "generate_response")
-    graph.add_edge("generate_response", END)
+    graph.add_edge("handle_greeting", END)
+    graph.add_edge("handle_menu_inquiry", END)
+    graph.add_edge("handle_order_update", END)
+    graph.add_edge("handle_customer_info", END)
+    graph.add_edge("handle_checkout_review", END)
+    graph.add_edge("handle_general", END)
 
-    checkpointer = MemorySaver()  # swap for SqliteSaver/PostgresSaver for durable memory
+    checkpointer = MemorySaver()
     return graph.compile(checkpointer=checkpointer)
 
 
-# a single compiled graph instance reused across requests
 agent_graph = build_graph()

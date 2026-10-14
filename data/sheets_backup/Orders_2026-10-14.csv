@@ -1,0 +1,3 @@
+Timestamp,Order ID,Customer Name,Email Address,Phone Number,Delivery Address,Ordered Items,Total Amount,Payment Method,Status
+2026-10-14T03:57:58.982344,ORD-20261014-6558,Tariqul Islam,tariqul@example.com,01755112233,"House 15, Road 7, Sector 4, Uttara, Dhaka",2x Kachchi Biryani (Mutton),৳760.00,CASH_ON_DELIVERY,CONFIRMED
+2026-10-14T03:58:24.087143,ORD-20261014-9D30,Tariqul Islam,tariqul@example.com,01755112233,"House 15, Road 7, Sector 4, Uttara, Dhaka",2x Kachchi Biryani (Mutton),৳760.00,CASH_ON_DELIVERY,CONFIRMED

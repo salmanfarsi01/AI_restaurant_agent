@@ -1,6 +1,6 @@
 """
 Telegram bot entrypoint (polling mode -- simplest for local development).
-Run with:  python -m app.api.telegram
+Run with: python -m app.api.telegram
 """
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, ContextTypes, filters
@@ -8,17 +8,17 @@ from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, Con
 from app.agent.graph import agent_graph
 from app.config import settings
 from app.database.database import init_db
+from app.database.seed_menu import seed_menu
 from app.utils.logger import get_logger
 
 log = get_logger(__name__)
 
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "স্বাগতম! Welcome to Dhaka Spice House 🍛\n"
-        "Ask me about the menu, place an order, or ask about delivery & policy — "
-        "in English or বাংলায়।"
-    )
+    user_id = str(update.effective_user.id)
+    config = {"configurable": {"thread_id": user_id}}
+    result = agent_graph.invoke({"user_id": user_id, "user_message": "/start", "channel": "telegram"}, config=config)
+    await update.message.reply_text(result.get("response", "Welcome to Dhaka Spice House!"))
 
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -26,13 +26,14 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
 
     config = {"configurable": {"thread_id": user_id}}
-    result = agent_graph.invoke({"user_id": user_id, "user_message": text}, config=config)
+    result = agent_graph.invoke({"user_id": user_id, "user_message": text, "channel": "telegram"}, config=config)
 
     await update.message.reply_text(result.get("response", "Sorry, something went wrong."))
 
 
 def main():
     init_db()
+    seed_menu()
     if not settings.telegram_bot_token:
         raise RuntimeError("TELEGRAM_BOT_TOKEN is not set in .env")
 

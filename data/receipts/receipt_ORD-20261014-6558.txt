@@ -1,0 +1,31 @@
+================================================
+               Dhaka Spice House                
+        House 42, Road 11, Banani, Dhaka        
+Tel:              +880 1700-000000              
+================================================
+
+ORDER CODE : ORD-20261014-6558
+DATE/TIME  : 2026-10-14T03:57:58.982344
+STATUS     : CONFIRMED (EMAIL VERIFIED)
+PAYMENT    : CASH ON DELIVERY (PENDING)
+------------------------------------------------
+CUSTOMER DETAILS:
+Name    : Tariqul Islam
+Phone   : 01755112233
+Email   : tariqul@example.com
+Address : House 15, Road 7, Sector 4, Uttara, Dhaka
+------------------------------------------------
+QTY   ITEM DESCRIPTION            PRICE    TOTAL
+------------------------------------------------
+2     Kachchi Biryani (Mutton)   350.00   700.00
+------------------------------------------------
+SUBTOTAL:                                ৳700.00
+DELIVERY FEE:                             ৳60.00
+================================================
+GRAND TOTAL (TO COLLECT):                ৳760.00
+================================================
+           KITCHEN FULFILLMENT TICKET           
+================================================
+
+
+
